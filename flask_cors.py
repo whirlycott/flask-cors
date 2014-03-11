@@ -27,7 +27,7 @@ def cross_origin(origins='*', methods=['GET','HEAD','POST','OPTIONS','PUT'],
     :param headers: The list of allowed headers to be injected in  `Access-Control-Allow-Headers`.
     :type headers: list or string
 
-    :param supports_credentials: TODO. Currently unusued, May be implemented in the future.
+    :param supports_credentials: Indicates that the request can receive credentials.
     :type supports_credentials: bool
 
     :param max_age: The maximum time for which this CORS request may be cached. This value is set as the `Access-Control-Max-Age` header.
@@ -99,6 +99,8 @@ def cross_origin(origins='*', methods=['GET','HEAD','POST','OPTIONS','PUT'],
                 resp.headers['Access-Control-Max-Age'] = str(max_age)
             if headers is not None:
                 resp.headers['Access-Control-Allow-Headers'] = headers
+            if supports_credentials is not None:
+                resp.headers['Access-Control-Allow-Credentials'] = str(bool(supports_credentials)).lower()
             return resp
 
         f.required_methods = ['OPTIONS']
