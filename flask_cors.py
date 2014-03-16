@@ -104,7 +104,6 @@ def cross_origin(origins='*', methods=['GET','HEAD','POST','OPTIONS','PUT'],
             return resp
 
         f.required_methods = ['OPTIONS']
-        f.provide_automatic_options = automatic_options # Override Flask's default OPTIONS handling
 
         return update_wrapper(wrapped_function, f)
     return decorator
